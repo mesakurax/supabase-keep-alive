@@ -1,0 +1,34 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    # 每 5 天运行一次 (UTC 时间 0:00)
+    # 注意: GitHub Actions 的 cron 使用 UTC 时间
+    - cron: '0 0 */5 * *'
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 设置 Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      
+      - name: 安装依赖
+        run: bun install
+      
+      - name: 执行保活脚本
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+        run: bun run scripts/keep-alive.ts
+      
+      - name: 记录执行时间
+        if: always()
+        run: echo "保活任务执行完成于 $(date '+%Y-%m-%d %H:%M:%S UTC')"

@@ -1,0 +1,23 @@
+{
+  "name": "supabase-keep-alive",
+  "version": "1.0.0",
+  "description": "Supabase 保活脚本 - 定期执行以保持 Supabase 项目活跃",
+  "type": "module",
+  "scripts": {
+    "keep-alive": "bun run scripts/keep-alive.ts",
+    "test": "bun run scripts/keep-alive.ts"
+  },
+  "keywords": [
+    "supabase",
+    "keep-alive",
+    "github-actions"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
