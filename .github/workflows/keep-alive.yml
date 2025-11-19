@@ -1,10 +1,10 @@
 name: Keep Supabase Alive
 
 on:
-  schedule:
+  # schedule:
     # 每 5 天运行一次 (UTC 时间 0:00)
     # 注意: GitHub Actions 的 cron 使用 UTC 时间
-    - cron: '0 0 */5 * *'
+    # - cron: '0 0 */5 * *'
   workflow_dispatch: # 允许手动触发
 
 jobs:
